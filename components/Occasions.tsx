@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+// chevron icons removed — clicks on the card toggle expansion/shrinking
 import { PRODUCT_CATEGORIES, MainCollection } from '../src/data/categories';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -78,9 +78,16 @@ const Occasions: React.FC = () => {
                 setExpandedIndex(isExpanded ? null : index);
               }}
             >
+              {/* Mobile overlay to prioritize card tap logic on small screens.
+                  When collapsed it captures taps; when expanded it yields to inner
+                  content by disabling pointer events. */}
+              <div
+                className={`absolute inset-0 md:hidden z-40 ${isExpanded ? 'pointer-events-none' : 'pointer-events-auto'}`}
+                onClick={() => setExpandedIndex(isExpanded ? null : index)}
+              />
               {/* Deep Background Image Layer */}
               <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[2000ms] ease-out will-change-transform"
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[2000ms] ease-out will-change-transform pointer-events-none"
                 style={{
                   backgroundImage: `url(${collectionImages[index] || collectionImages[0]})`,
                   transform: isExpanded ? 'scale(1.05)' : 'scale(1.15)', // Slow dramatic zoom out on expand
@@ -88,9 +95,9 @@ const Occasions: React.FC = () => {
               />
 
               {/* Complex Gradient Overlays to ensure text legibility while keeping the cinematic mood */}
-              <div className={`absolute inset-0 transition-opacity duration-1000 ${isExpanded ? 'bg-black/40' : 'bg-black/70 group-hover:bg-black/50'}`} />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/50" />
-              <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-transparent to-transparent opacity-60" />
+              <div className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${isExpanded ? 'bg-black/40' : 'bg-black/70 group-hover:bg-black/50'}`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-[#050505]/50 pointer-events-none" />
+              <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-transparent to-transparent opacity-60 pointer-events-none" />
 
               {/* Collapsed State Title (Vertical on Desktop, Horizontal on Mobile) */}
               <div
@@ -102,10 +109,7 @@ const Occasions: React.FC = () => {
                   >
                     {collection.name}
                   </h4>
-                  <ChevronDown 
-                    className="w-5 h-5 md:w-6 md:h-6 text-[#D4AF37] pointer-events-auto cursor-pointer hover:scale-110 transition-transform duration-300 flex-shrink-0" 
-                    strokeWidth={1}
-                  />
+                  {/* chevron removed to allow card-level clicks */}
                 </div>
               </div>
 
@@ -113,19 +117,7 @@ const Occasions: React.FC = () => {
               <div
                 className={`absolute inset-0 p-6 md:p-16 flex flex-col justify-end pointer-events-none transition-opacity duration-700 ease-out z-20 ${isExpanded ? 'opacity-100 delay-300' : 'opacity-0'}`}
               >
-                {/* Collapse Arrow Button - Top Right */}
-                <div className="absolute top-6 md:top-16 right-6 md:right-16 z-30 pointer-events-auto">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setExpandedIndex(null);
-                    }}
-                    className="text-[#D4AF37] hover:scale-125 transition-transform duration-300 outline-none"
-                    aria-label="Collapse collection"
-                  >
-                    <ChevronUp className="w-8 h-8 md:w-10 md:h-10" strokeWidth={1} />
-                  </button>
-                </div>
+                {/* collapse button removed — card click will handle collapsing */}
 
                 <div className="max-w-4xl pointer-events-auto">
                   {/* Glowing Outline Box Accent */}

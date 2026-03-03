@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Logo from '../ARBIAN ETHOS.png';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import gsap from 'gsap';
 import { PRODUCT_CATEGORIES } from '../src/data/categories';
@@ -111,7 +112,7 @@ const Navbar: React.FC = () => {
 
             <div className="relative">
               <img
-                src="ARBIAN ETHOS.png"
+                src={Logo}
                 alt="Arabian Ethos Logo"
                 className="h-10 md:h-16 lg:h-20 w-auto object-contain transition-all duration-700 logo-visibility group-hover:scale-105"
               />
@@ -148,7 +149,7 @@ const Navbar: React.FC = () => {
 
         {/* Close Button Header */}
         <div className="w-full px-6 md:px-12 py-8 flex justify-between items-center relative z-10 border-b border-[rgba(212,175,55,0.1)] flex-shrink-0">
-          <img src="ARBIAN ETHOS.png" alt="Arabian Ethos" className="h-10 w-auto opacity-80" />
+          <img src={Logo} alt="Arabian Ethos" className="h-10 w-auto opacity-80" />
           <button
             onClick={() => setIsMenuOpen(false)}
             className="flex items-center gap-3 text-white group outline-none"

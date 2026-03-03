@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Logo from '../ARBIAN ETHOS.png';
 import gsap from 'gsap';
 
 interface PreloaderProps {
@@ -64,7 +65,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
             <div className="relative flex flex-col items-center z-10">
                 <img
                     ref={logoRef}
-                    src="ARBIAN ETHOS.png"
+                    src={Logo}
                     alt="Arabian Ethos Crest"
                     className="w-48 md:w-64 h-auto object-contain drop-shadow-[0_0_20px_rgba(212,175,55,0.4)] saturate-[1.1]"
                 />

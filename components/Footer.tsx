@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Logo from '../ARBIAN ETHOS.png';
 import { Instagram, Facebook, Youtube, ArrowRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -187,11 +188,11 @@ const Footer: React.FC = () => {
               >
                 {/* Front (Logo) */}
                 <div className="absolute inset-0 [backface-visibility:hidden]">
-                  <img
-                    src="ARBIAN ETHOS.png"
-                    alt="Arabian Ethos"
-                    className="w-full h-full object-contain filter saturate-[1.2] brightness-110 drop-shadow-[0_0_15px_rgba(212,175,55,0.15)] origin-left"
-                  />
+                    <img
+                      src={Logo}
+                      alt="Arabian Ethos"
+                      className="w-full h-full object-contain filter saturate-[1.2] brightness-110 drop-shadow-[0_0_15px_rgba(212,175,55,0.15)] origin-left"
+                    />
                 </div>
 
                 {/* Back (Business Card) */}
