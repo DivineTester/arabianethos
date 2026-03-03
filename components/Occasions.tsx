@@ -19,15 +19,8 @@ const Occasions: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
-  // Function to trigger the global "Coming Soon" toast
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLDivElement | HTMLButtonElement>, categoryName: string) => {
-    e.preventDefault();
-    e.stopPropagation(); // Prevent accordion from toggling when clicking a link
-    const event = new CustomEvent('SHOW_TOAST', {
-      detail: { message: `The ${categoryName} catalog will be available shortly.` }
-    });
-    window.dispatchEvent(event);
-  };
+  // All card clicks are handled by the parent — remove individual link handlers
+  // so clicking anywhere on a card toggles expansion/shrinking.
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -74,16 +67,15 @@ const Occasions: React.FC = () => {
           return (
             <div
               key={index}
-              className={`relative group cursor-pointer overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] flex-shrink-0 ${isExpanded
-                ? 'flex-[5.5_5.5_0%] md:flex-[4_4_0%]' // Exact 55vh on mobile, prevents overlap
-                : 'flex-[1.5_1.5_0%] md:flex-[1_1_0%]'  // Exact 15vh on mobile (45vh total for the 3 closed items)
-                }`}
-              onClick={(e) => {
-                if (!isExpanded) {
-                  setExpandedIndex(index);
-                } else {
-                  handleLinkClick(e, collection.name);
-                }
+              className={
+                'relative group cursor-pointer overflow-hidden transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] flex-shrink-0 ' +
+                (isExpanded
+                  ? 'flex-[5.5_5.5_0%] md:flex-[4_4_0%]'
+                  : 'flex-[1.5_1.5_0%] md:flex-[1_1_0%]')
+              }
+              style={{ touchAction: 'manipulation' }}
+              onClick={() => {
+                setExpandedIndex(isExpanded ? null : index);
               }}
             >
               {/* Deep Background Image Layer */}
@@ -102,19 +94,17 @@ const Occasions: React.FC = () => {
 
               {/* Collapsed State Title (Vertical on Desktop, Horizontal on Mobile) */}
               <div
-                className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-500 z-10 ${isExpanded ? 'opacity-0' : 'opacity-100 delay-300'}`}
+                className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 z-10 ${isExpanded ? 'opacity-0 pointer-events-none' : 'opacity-100 delay-300 pointer-events-auto'}`}
               >
-                <div className="flex items-center gap-4">
-                  <h4 className="font-serif-luxury text-2xl md:text-3xl text-white/70 tracking-[0.2em] uppercase transform md:-rotate-90 whitespace-nowrap">
+                <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 px-2 text-center md:text-left">
+                  <h4
+                    className="font-serif-luxury text-lg sm:text-2xl md:text-3xl text-white/70 tracking-[0.2em] uppercase transform md:-rotate-90 whitespace-normal md:whitespace-nowrap cursor-pointer leading-tight"
+                  >
                     {collection.name}
                   </h4>
                   <ChevronDown 
-                    className="w-6 h-6 md:w-8 md:h-8 text-[#D4AF37] pointer-events-auto cursor-pointer hover:scale-110 transition-transform duration-300" 
+                    className="w-5 h-5 md:w-6 md:h-6 text-[#D4AF37] pointer-events-auto cursor-pointer hover:scale-110 transition-transform duration-300 flex-shrink-0" 
                     strokeWidth={1}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setExpandedIndex(index);
-                    }}
                   />
                 </div>
               </div>
@@ -143,7 +133,6 @@ const Occasions: React.FC = () => {
 
                   <h4
                     className={`font-serif-luxury text-3xl sm:text-5xl md:text-6xl text-white tracking-[0.1em] uppercase mb-4 md:mb-8 cursor-pointer hover:text-[#D4AF37] transition-all duration-700 transform ${isExpanded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'} drop-shadow-lg`}
-                    onClick={(e) => handleLinkClick(e, collection.name)}
                   >
                     {collection.name}
                   </h4>
@@ -159,8 +148,8 @@ const Occasions: React.FC = () => {
                           {section.items.slice(0, 4).map((item, itemIdx) => ( // Only show top 4 items to keep UI clean
                             <button
                               key={itemIdx}
-                              onClick={(e) => handleLinkClick(e, item.name)}
                               className="font-montserrat text-xs text-white/60 hover:text-white transition-colors uppercase text-left w-fit"
+                              onClick={(e) => { e.stopPropagation(); /* reserved: no action */ }}
                             >
                               {item.name}
                             </button>
@@ -177,8 +166,8 @@ const Occasions: React.FC = () => {
 
                   {collection.featuredLink && (
                     <button
-                      onClick={(e) => handleLinkClick(e, collection.name)}
                       className={`mt-4 md:mt-16 group inline-flex items-center gap-4 font-montserrat text-[10px] md:text-xs tracking-[0.3em] text-[#D4AF37] uppercase transition-all duration-1000 delay-300 transform outline-none ${isExpanded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+                      onClick={(e) => { e.stopPropagation(); /* reserved: no action */ }}
                     >
                       Explore Collection
                       <div className="w-8 h-[1px] bg-[#D4AF37] group-hover:w-16 transition-all duration-500 ease-out relative">

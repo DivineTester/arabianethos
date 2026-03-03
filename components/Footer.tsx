@@ -223,13 +223,13 @@ const Footer: React.FC = () => {
 
 
               {/* The Address - Styled to match "ELEVATION" */}
-              <div className="flex flex-col gap-2 font-serif-luxury text-[18px] text-white italic tracking-[0.1em] mb-8">
+              <div className="flex flex-col gap-2 text-[18px] text-white italic tracking-[0.1em] mb-8">
                 <p>38, HAINES ROAD, FRAZER TOWN</p>
                 <p>560005 BANGALORE</p>
               </div>
 
               {/* The Contact - Styled to match "ELEVATION" */}
-              <div className="flex flex-col gap-3 font-serif-luxury text-[18px] text-white italic tracking-[0.1em]">
+              <div className="flex flex-col gap-3 text-[18px] text-white italic tracking-[0.1em]">
                 <a href="tel:+919739751786" className="w-fit hover:text-[#D4AF37] transition-colors relative group">
                   +91 973 975 1786
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full opacity-50"></span>
@@ -306,10 +306,10 @@ const Footer: React.FC = () => {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
 
           {/* Left Side: Copyright */}
-          <div ref={addToRefs} className="flex items-center gap-2 font-montserrat text-[11px] tracking-widest text-gray-500 uppercase">
+          <div ref={addToRefs} className="flex flex-col items-center md:flex-row md:items-center gap-1 md:gap-2 font-montserrat text-[11px] tracking-widest text-gray-500 uppercase">
             <span>© {new Date().getFullYear()} Arabian Ethos</span>
             <span className="hidden md:inline mx-2 text-[rgba(212,175,55,0.3)]">|</span>
-            <span className="hidden md:inline">A UNIT OF AL JUMANAH VENTURES LLP</span>
+            <span className="block md:inline mt-1 md:mt-0">A UNIT OF AL JUMANAH VENTURES LLP</span>
           </div>
 
           {/* Right Side: Payment Methods */}

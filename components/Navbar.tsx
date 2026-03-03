@@ -161,11 +161,19 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Categories Grid Layout */}
+        {/*
+          The Lenis smooth-scrolling instance wraps the entire page and captures
+          wheel/touch events. When the overlay menu is open we want native
+          scrolling inside the menu content so we add `data-lenis-prevent` to the
+          scrollable container. This attribute tells Lenis to ignore the element
+          and allows the browser to handle wheel events directly.
+        */}
         <div
+          data-lenis-prevent
           className="flex-1 overflow-y-auto overflow-x-hidden p-6 md:p-12 lg:p-20 relative z-10 custom-scrollbar"
-          style={{ WebkitOverflowScrolling: 'touch', touchAction: 'manipulation' }}
+          style={{ WebkitOverflowScrolling: 'touch', touchAction: 'manipulation', minHeight: 0, overscrollBehavior: 'contain' }}
         >
-          <div className="max-w-[1400px] mx-auto min-h-full flex flex-col md:flex-row gap-12 lg:gap-24">
+          <div className="max-w-[1400px] mx-auto w-full flex flex-col md:flex-row gap-12 lg:gap-24">
 
             {/* Main Categories Menu */}
             <div className="w-full md:w-1/2 flex flex-col gap-6 md:gap-8 shrink-0">
@@ -239,7 +247,7 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Dynamic Sub-categories Display Panel (DESKTOP ONLY) */}
-            <div className="hidden md:grid w-[60%] border-l border-[rgba(212,175,55,0.1)] pl-12 lg:pl-24 items-start pb-20">
+            <div className="hidden md:grid flex-1 border-l border-[rgba(212,175,55,0.1)] pl-12 lg:pl-24 items-start pb-20">
               {PRODUCT_CATEGORIES.map((cat, idx) => (
                 <div
                   key={idx}
