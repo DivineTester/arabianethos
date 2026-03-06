@@ -289,10 +289,18 @@ const Footer: React.FC = () => {
                   JOIN US
                 </h4>
                 <div className="flex flex-col gap-3 font-montserrat text-[13px] text-white/80 font-light">
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors w-fit">Instagram</a>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors w-fit">Facebook</a>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors w-fit">Pinterest</a>
-                  <a href="#" className="hover:text-[#D4AF37] transition-colors w-fit">Youtube</a>
+                  <a href="https://www.instagram.com/arabian.ethos?igsh=MWljZHY4MHFuejkxMA==" target="_blank" rel="noopener noreferrer" className="hover:text-[#D4AF37] transition-colors w-fit flex items-center gap-2">
+                    <Instagram size={16} />
+                    <span>Instagram</span>
+                  </a>
+                  <a href="https://www.facebook.com/share/1Bo4VVvUVA/" target="_blank" rel="noopener noreferrer" className="hover:text-[#D4AF37] transition-colors w-fit flex items-center gap-2">
+                    <Facebook size={16} />
+                    <span>Facebook</span>
+                  </a>
+                  <a href="https://youtube.com/@arabianethos?si=aalXYZZghT-wVtfw" target="_blank" rel="noopener noreferrer" className="hover:text-[#D4AF37] transition-colors w-fit flex items-center gap-2">
+                    <Youtube size={16} />
+                    <span>Youtube</span>
+                  </a>
                 </div>
               </div>
 
